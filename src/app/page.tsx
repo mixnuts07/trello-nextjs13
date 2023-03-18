@@ -33,23 +33,10 @@ function CreateBoard() {
 
 export default function Home() {
   const { register, handleSubmit } = useForm();
-  const objs = {
-    1: "1", // uuid??
-    2: "sample",
-  }; // {'boardsCollection':[{id:1, title:test}, {},{}]}
-  const objJson = JSON.stringify(objs);
-  localStorage.setItem("boardsCollection", objJson);
-  const item = localStorage.getItem("boardsCollection");
-  console.log(item);
   return (
     <div>
       {/* <Board /> */}
       <h1>Winny</h1>
-      <ul>
-        {Object.keys(objs).map((key) => {
-          return <li key={key}>{objs[key]}</li>;
-        })}
-      </ul>
       {/* <Button onClick={()=>CreateNewBoard()}>Create a New Board</Button> */}
       <form onSubmit={handleSubmit(CreateBoard)}>
         <h5>Create Your Board</h5>
