@@ -1,95 +1,62 @@
+"use client";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import Board from "./board/page";
+import { Button } from "@mui/material";
+import { useForm } from "react-hook-form";
 const inter = Inter({ subsets: ["latin"] });
 
+// function CreateNewBoard() {
+//   if(localStorage.getItem('boardsCollection') === null) {
+//     localStorage.setItem('boardsCollection', {"boardsCollection":[]})
+//   }
+// }
+
+function CreateBoard() {
+  const objs = {
+    1: "1", // uuid??
+    2: "sample",
+  }; // {'boardsCollection':[{id:1, title:test}, {},{}]}
+  const objJson = JSON.stringify(objs);
+  localStorage.setItem("boardsCollection", objJson);
+  const item = localStorage.getItem("boardsCollection");
+  console.log(item);
+  return (
+    <ul>
+      {Object.keys(objs).map((key) => {
+        return <li key={key}>{objs[key]}</li>;
+      })}
+    </ul>
+  );
+}
+
 export default function Home() {
+  const { register, handleSubmit } = useForm();
+  const objs = {
+    1: "1", // uuid??
+    2: "sample",
+  }; // {'boardsCollection':[{id:1, title:test}, {},{}]}
+  const objJson = JSON.stringify(objs);
+  localStorage.setItem("boardsCollection", objJson);
+  const item = localStorage.getItem("boardsCollection");
+  console.log(item);
   return (
     <div>
       {/* <Board /> */}
-      <h1>He</h1>
+      <h1>Winny</h1>
+      <ul>
+        {Object.keys(objs).map((key) => {
+          return <li key={key}>{objs[key]}</li>;
+        })}
+      </ul>
+      {/* <Button onClick={()=>CreateNewBoard()}>Create a New Board</Button> */}
+      <form onSubmit={handleSubmit(CreateBoard)}>
+        <h5>Create Your Board</h5>
+        <input defaultValue="test" {...register("example")} />
+        {/* <Button onClick={() => CreateBoard()}>Create Board</Button> */}
+        <input type="submit" />
+      </form>
     </div>
-    // <main className={styles.main}>
-    //   <div className={styles.description}>
-    //     <p>
-    //       Get started by editing&nbsp;
-    //       <code className={styles.code}>src/app/page.tsx</code>
-    //     </p>
-    //     <div>
-    //       <a
-    //         href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //         target="_blank"
-    //         rel="noopener noreferrer"
-    //       >
-    //         By{' '}
-    //         <Image
-    //           src="/vercel.svg"
-    //           alt="Vercel Logo"
-    //           className={styles.vercelLogo}
-    //           width={100}
-    //           height={24}
-    //           priority
-    //         />
-    //       </a>
-    //     </div>
-    //   </div>
-
-    //   <div className={styles.center}>
-    //     <Image
-    //       className={styles.logo}
-    //       src="/next.svg"
-    //       alt="Next.js Logo"
-    //       width={180}
-    //       height={37}
-    //       priority
-    //     />
-    //     <div className={styles.thirteen}>
-    //       <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-    //     </div>
-    //   </div>
-
-    //   <div className={styles.grid}>
-    //     <a
-    //       href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2 className={inter.className}>
-    //         Docs <span>-&gt;</span>
-    //       </h2>
-    //       <p className={inter.className}>
-    //         Find in-depth information about Next.js features and API.
-    //       </p>
-    //     </a>
-
-    //     <a
-    //       href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2 className={inter.className}>
-    //         Templates <span>-&gt;</span>
-    //       </h2>
-    //       <p className={inter.className}>Explore the Next.js 13 playground.</p>
-    //     </a>
-
-    //     <a
-    //       href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-    //       className={styles.card}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       <h2 className={inter.className}>
-    //         Deploy <span>-&gt;</span>
-    //       </h2>
-    //       <p className={inter.className}>
-    //         Instantly deploy your Next.js site to a shareable URL with Vercel.
-    //       </p>
-    //     </a>
-    //   </div>
-    // </main>
   );
 }
